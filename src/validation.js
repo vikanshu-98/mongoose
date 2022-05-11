@@ -1,4 +1,5 @@
 const mongo = require('mongoose');
+const validation = require('validator');
 
 
 //connection
@@ -18,6 +19,14 @@ const scheema = new mongo.Schema({
         uppercase:true,
         minlength:[2,'minimum should be 2 letter'],
         maxlength:4
+    },
+    email:{
+        type:String,
+        validate(value){
+            if(! validation.isEmail(value)){
+                throw new Error("email is not valid.Kindly!! insert the valid email.")
+            }
+        }
     },
     ctype:{
         type:String,
@@ -59,8 +68,9 @@ insertDocument = async()=>{
   try{
         const data=new collection({
             name:"                                 ram ",
-            ctype:"ram",
-            videos:-1,
+            email:"abc@",
+            ctype:"database",
+            videos:2,
             active:true
         })
         const result = await collection.insertMany([data]);
