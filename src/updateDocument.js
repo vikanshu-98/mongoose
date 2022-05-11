@@ -73,31 +73,47 @@ createDocument=async()=>{
         }
         
     }
-    createDocument()
+    //createDocument()
 
+    const getDocumet =async ()=>{
+        try{
+          const result = await studentS.find()
+          console.log(result)  
+        }catch(ex){
+            console.log(ex);
+        }
+        
+    
+    }
+    
+    
+    //getDocumet() 
 
-const getDocument =async ()=>{
+const updateDocument =async ()=>{
     try{
-      const result = await studentS.find({isComplete:true})
-      .select({_id:false,name:true}).limit(1);
+    //  const result = await studentS.updateOne({_id: "627a51d1a7eff0839b40d0cc"},{$set:{courseName:"B.Tech"}})
+       const result   = await studentS.findByIdAndUpdate({_id:"627bcfebd0e9ceb9392daead"},{$set:{name:"vikanshu chauhan"}},{new:true,useFindAnyModify:false})
       console.log(result)  
     }catch(ex){
         console.log(ex);
     }
     
 
-} 
-getDocument()
+}
+
+updateDocument()
 
 
 
+const deleteDocument =async ()=>{
+    try{
+       const result   = await studentS.deleteOne({_id:"627bcfebd0e9ceb9392daead"})
+      console.log(result)  
+    }catch(ex){
+        console.log(ex);
+    }
+    
 
+}
 
-
-//update document 
-
-
-
-
-
-
+deleteDocument()
